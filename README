@@ -1,0 +1,30 @@
+This is generic dynamic array module
+
+- It offers a generalisation of the earlier dynamic string, allowing
+  us to store and manipulate a dynamic array of void * pointers.
+
+- Note that this does NOT give an easy way of creating a dynamic array
+  of a built-in type, such as an int or double.
+
+- As well as the "void **data" field (a basal pointer to one or more
+  "void *" pointers) and the length and capacity fields, the
+  struct dynarray also stores two function pointers:
+
+  - pef: print element function
+  - fef: free element function
+
+  These are invoked automatically by operators that print and free an
+  entire dynarray:
+
+	extern void dynarray_print( dynarray d, FILE * out );
+	extern void dynarray_free( dynarray d );
+
+- There is a also a foreach element callback function pointer type,
+  not stored in the structure, but instead explicitly given to each
+  call of the foreach operator:
+
+extern void dynarray_foreach( dynarray d, dynarray_foreachf cb, void * extra );
+
+- Finally, there is also a unit test program testdynarray.c.
+  In the unit test program, I've chosen a relatively interesting
+  "person" data type (storing firstname, lastname and age).
