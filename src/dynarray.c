@@ -18,8 +18,10 @@
 dynarray dynarray_create( int cap, dynarray_printf pef, dynarray_freef fef ) {
   dynarray new = malloc( sizeof(struct dynarray));
   assert( new != NULL );
+
   new->data = malloc(cap * sizeof(DA_ELEMENT));
   assert( new->data != NULL );
+
   new->len = 0;
   new->cap = cap;
   new->fef = fef;
@@ -34,7 +36,6 @@ dynarray dynarray_create( int cap, dynarray_printf pef, dynarray_freef fef ) {
 int dynarray_len( dynarray d ) {
   return d->len;
 }
-
 
 // data = dynarray_data( d );
 //   Return the dynarray's data as a void * for typecast-free copying

@@ -22,6 +22,7 @@ struct person
   char lastname[NAMELEN];
   int age;
 };
+
 typedef struct person *person;
 
 #define COPYNAME(dst,src) do { int len = strlen(src);\
@@ -47,36 +48,55 @@ static void person_print( FILE *out, DA_ELEMENT el, int pos ) {
 }
 
 
+// DA_ELEMENT was a typedef for void *
+// [person1, person2, person3]
+// DA_ELEMENT = person
 static void psumagecb( DA_ELEMENT el, int pos, void *stateptr ) {
+  // dummy struct person * to reference the same data in el.
   person p = el;
   int *total = stateptr;
   *total += p->age;
 }
 
-
 static void str_print( FILE *out, DA_ELEMENT el, int pos ) {
   fputs( (char *)el, out );
 }
 
-
+// DA_ELEMENT = string
+// strlen(char *s)
 static void ssumlengthcb( DA_ELEMENT el, int pos, void *stateptr ) {
-  char *s = el;
+  char *p = el;
   int *total = stateptr;
-  *total += strlen(s);
+  *total += strlen(p);
 }
 
-
+// toupper(*s) returns an upper character, given a character
+// YEOEUN
+// use for loop!
 static void puppercasecb( DA_ELEMENT el, int pos, void *stateptr ) {
   person p = el;
-  for( char *s = p->firstname; *s; s++ ) {
-    *s = toupper(*s);
+  char *firstname = p->firstname;
+  char *lastname = p->lastname;
+
+  // cast the return type of the toupper (int) to a (char)
+  // firstname[i] is a type char
+  size_t a = strlen(firstname);
+  for(int i = 0; i < a; i++){
+    firstname[i] = (char) toupper(firstname[i]);
     break;
   }
-  for( char *s = p->lastname; *s; s++ ) {
-    *s = toupper(*s);
+  size_t b = strlen(lastname);
+  for(int i = 0; i < b; i++){
+    lastname[i] = (char) toupper(lastname[i]);
     break;
   }
-}
+
+//
+//  for (char *s = p->firstname; *s; s++) {
+//      *s = toupper(*s);
+//  }
+
+};
 
 
 int main( void ) {

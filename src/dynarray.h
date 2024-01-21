@@ -23,7 +23,7 @@ struct dynarray
   DA_ELEMENT *data;    // single malloc()ed chunk of generic pointers
   int cap;	       // current allocated size of chunk (the capacity)
   int len;	       // how many elements stored in chunk (len <= cap)
-  dynarray_freef fef;  // how to free an element
+  dynarray_freef fef;  // how to free an element (function pointer)
   dynarray_printf pef; // how to print an element
 };
 
