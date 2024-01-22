@@ -1,7 +1,3 @@
-//
-// dynarray.c:	a minimal dynamic generic array that can grow.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

@@ -9,6 +9,12 @@
 //
 #define DA_ELEMENT void *
 
+// macro funcName(params) body
+#define COPYNAME(dst,src) do { int len = strlen(src);\
+	strncpy( dst, src, NAMELEN-1 );\
+	if( len >= NAMELEN ) (dst)[NAMELEN-1] = '\0';\
+	} while( 0 )
+
 // "print an element" function pointer type
 typedef void (*dynarray_printf)( FILE *out, DA_ELEMENT el, int pos );
 

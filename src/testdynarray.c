@@ -1,7 +1,3 @@
-/*
- * testdynarray.c:	test program for growable dynarray
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -25,10 +21,10 @@ struct person
 
 typedef struct person *person;
 
-#define COPYNAME(dst,src) do { int len = strlen(src);\
-	strncpy( dst, src, NAMELEN-1 );\
-	if( len >= NAMELEN ) (dst)[NAMELEN-1] = '\0';\
-	} while( 0 )
+// cond ? if true execute here : if not, execute here
+#define ABS_DIFF(a, b) ((a) > (b) ? (a-b) : (b-a))
+#define MINIMAL(a, b) ((a) >= (b) ? (b) : (a))
+
 
 static person person_make( char *first, char *last, int age ) {
   person p = malloc( sizeof(struct person) );

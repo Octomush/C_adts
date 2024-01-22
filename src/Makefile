@@ -1,24 +1,29 @@
-CC ?= gcc
-CFLAGS ?= -Wall
-BUILD ?= compile
+CC = gcc
+CFLAGS = -Wall
+LDFLAGS =
 
-all: $(BUILD)
+# List of object files
+OBJS = dynArray.o testDynArray.o testUtils.o
 
+# The main target
+all: testDynArray
+
+# Rule to build the executable
+testDynArray: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Rule to build object files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Dependencies
+testDynArray.o: dynArray.h testutils.h testDynArray.c
+testUtils.o: testutils.h dynArray.h testUtils.c
+dynArray.o: dynArray.h dynArray.c
+stduentDatabase.o: dynArray.h studentDatabase.c
+
+# Cleanup rule
 clean:
-	/bin/rm -f $(BUILD) *.o core
+	rm -f $(OBJS) testDynArray
 
-compile: dynArray.o testDynArray.o testUtils.o
-
-# CFLAGS = extra rules (flags) you assign to the C compiler
-# CC = what compiler to use
-# n.o is made automatically from n.c with a recipe of the form
-  #‘$(CC) $(CPPFLAGS) $(CFLAGS) -c’.
-
-dynArray.o: dynArray.h
-	# $(CC) $(CFLAGS) -c dynArray.c
-
-testDynArray.o: dynArray.h testutils.h
-	# $(CC) $(CFLAGS) -c testDynArray.c
-
-testUtils.o: testutils.h dynArray.h
-	# $(CC) $(CFLAGS) -c testUtils.c
+.PHONY: all clean
