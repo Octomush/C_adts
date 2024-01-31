@@ -17,10 +17,10 @@ testDynArray: $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Dependencies
-testDynArray.o: dynArray.h testutils.h testDynArray.c
-testUtils.o: testutils.h dynArray.h testUtils.c
-dynArray.o: dynArray.h dynArray.c
-stduentDatabase.o: dynArray.h studentDatabase.c
+testDynArray.o: dynarray.h Adts/testutils.h Adts/testdynarray.c
+testUtils.o: testutils.h Adts/dynarray.h Adts/testutils.c
+dynArray.o: dynarray.h Adts/dynarray.c
+stduentDatabase.o: dynarray.h Adts/studentDatabase.c
 
 # Cleanup rule
 clean:

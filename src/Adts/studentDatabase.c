@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "dynArray.h"
+#include "dynarray.h"
 
 #define MAX_NAME_LENGTH 50
 
